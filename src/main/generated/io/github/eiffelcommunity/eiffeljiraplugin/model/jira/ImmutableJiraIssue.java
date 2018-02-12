@@ -1,101 +1,69 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.model.jira;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * Immutable implementation of {@link JiraIssue}.
  * <p>
  * Use the builder to create immutable instances:
- * {@code ImmutableJiraIssue.builder()}.
+ * {@code new JiraIssue.Builder()}.
  */
 @SuppressWarnings({"all"})
+@ParametersAreNonnullByDefault
 @Generated({"Immutables.generator", "JiraIssue"})
+@Immutable
+@CheckReturnValue
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class ImmutableJiraIssue
-    implements JiraIssue {
+final class ImmutableJiraIssue extends JiraIssue {
   private final String id;
   private final URI self;
-  private final ImmutableJiraIssueFields fields;
+  private final JiraIssueFields fields;
 
-  private ImmutableJiraIssue(
-      String id,
-      URI self,
-      ImmutableJiraIssueFields fields) {
-    this.id = id;
-    this.self = self;
-    this.fields = fields;
+  private ImmutableJiraIssue(ImmutableJiraIssue.Builder builder) {
+    this.id = builder.id;
+    this.self = builder.self;
+    this.fields = builder.fields;
   }
 
   /**
    * @return The value of the {@code id} attribute
    */
-  @JsonProperty("id")
+  @JsonProperty
   @Override
-  public String id() {
+  public String getId() {
     return id;
   }
 
   /**
    * @return The value of the {@code self} attribute
    */
-  @JsonProperty("self")
+  @JsonProperty
   @Override
-  public URI self() {
+  public URI getSelf() {
     return self;
   }
 
   /**
    * @return The value of the {@code fields} attribute
    */
-  @JsonProperty("fields")
+  @JsonProperty
   @Override
-  public ImmutableJiraIssueFields fields() {
+  public JiraIssueFields getFields() {
     return fields;
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link JiraIssue#id() id} attribute.
-   * An equals check used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for id
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableJiraIssue withId(String value) {
-    if (this.id.equals(value)) return this;
-    String newValue = Objects.requireNonNull(value, "id");
-    return new ImmutableJiraIssue(newValue, this.self, this.fields);
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link JiraIssue#self() self} attribute.
-   * A shallow reference equality check is used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for self
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableJiraIssue withSelf(URI value) {
-    if (this.self == value) return this;
-    URI newValue = Objects.requireNonNull(value, "self");
-    return new ImmutableJiraIssue(this.id, newValue, this.fields);
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link JiraIssue#fields() fields} attribute.
-   * A shallow reference equality check is used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for fields
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableJiraIssue withFields(ImmutableJiraIssueFields value) {
-    if (this.fields == value) return this;
-    ImmutableJiraIssueFields newValue = Objects.requireNonNull(value, "fields");
-    return new ImmutableJiraIssue(this.id, this.self, newValue);
   }
 
   /**
@@ -103,7 +71,7 @@ public final class ImmutableJiraIssue
    * @return {@code true} if {@code this} is equal to {@code another} instance
    */
   @Override
-  public boolean equals(Object another) {
+  public boolean equals(@Nullable Object another) {
     if (this == another) return true;
     return another instanceof ImmutableJiraIssue
         && equalTo((ImmutableJiraIssue) another);
@@ -134,107 +102,41 @@ public final class ImmutableJiraIssue
    */
   @Override
   public String toString() {
-    return "JiraIssue{"
-        + "id=" + id
-        + ", self=" + self
-        + ", fields=" + fields
-        + "}";
+    return MoreObjects.toStringHelper("JiraIssue")
+        .omitNullValues()
+        .add("id", id)
+        .add("self", self)
+        .add("fields", fields)
+        .toString();
   }
 
   /**
-   * Utility type used to correctly read immutable object from JSON representation.
-   * @deprecated Do not use this type directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonDeserialize
-  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
-  static final class Json implements JiraIssue {
-    String id;
-    URI self;
-    ImmutableJiraIssueFields fields;
-    @JsonProperty("id")
-    public void setId(String id) {
-      this.id = id;
-    }
-    @JsonProperty("self")
-    public void setSelf(URI self) {
-      this.self = self;
-    }
-    @JsonProperty("fields")
-    public void setFields(ImmutableJiraIssueFields fields) {
-      this.fields = fields;
-    }
-    @Override
-    public String id() { throw new UnsupportedOperationException(); }
-    @Override
-    public URI self() { throw new UnsupportedOperationException(); }
-    @Override
-    public ImmutableJiraIssueFields fields() { throw new UnsupportedOperationException(); }
-  }
-
-  /**
-   * @param json A JSON-bindable data structure
-   * @return An immutable value type
-   * @deprecated Do not use this method directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-  static ImmutableJiraIssue fromJson(Json json) {
-    ImmutableJiraIssue.Builder builder = ImmutableJiraIssue.builder();
-    if (json.id != null) {
-      builder.id(json.id);
-    }
-    if (json.self != null) {
-      builder.self(json.self);
-    }
-    if (json.fields != null) {
-      builder.fields(json.fields);
-    }
-    return builder.build();
-  }
-
-  /**
-   * Creates an immutable copy of a {@link JiraIssue} value.
-   * Uses accessors to get values to initialize the new immutable instance.
-   * If an instance is already immutable, it is returned as is.
-   * @param instance The instance to copy
-   * @return A copied immutable JiraIssue instance
-   */
-  public static ImmutableJiraIssue copyOf(JiraIssue instance) {
-    if (instance instanceof ImmutableJiraIssue) {
-      return (ImmutableJiraIssue) instance;
-    }
-    return ImmutableJiraIssue.builder()
-        .from(instance)
-        .build();
-  }
-
-  /**
-   * Creates a builder for {@link ImmutableJiraIssue ImmutableJiraIssue}.
-   * @return A new ImmutableJiraIssue builder
-   */
-  public static ImmutableJiraIssue.Builder builder() {
-    return new ImmutableJiraIssue.Builder();
-  }
-
-  /**
-   * Builds instances of type {@link ImmutableJiraIssue ImmutableJiraIssue}.
+   * Builds instances of type {@link JiraIssue JiraIssue}.
    * Initialize attributes and then invoke the {@link #build()} method to create an
    * immutable instance.
    * <p><em>{@code Builder} is not thread-safe and generally should not be stored in a field or collection,
    * but instead used immediately to create instances.</em>
    */
-  public static final class Builder {
+  @NotThreadSafe
+  @EiffelStyleImmutable
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class Builder {
     private static final long INIT_BIT_ID = 0x1L;
     private static final long INIT_BIT_SELF = 0x2L;
     private static final long INIT_BIT_FIELDS = 0x4L;
     private long initBits = 0x7L;
 
-    private String id;
-    private URI self;
-    private ImmutableJiraIssueFields fields;
+    private @Nullable String id;
+    private @Nullable URI self;
+    private @Nullable JiraIssueFields fields;
 
-    private Builder() {
+    /**
+     * Creates a builder for {@link JiraIssue JiraIssue} instances.
+     */
+    public Builder() {
+      if (!(this instanceof JiraIssue.Builder)) {
+        throw new UnsupportedOperationException("Use: new JiraIssue.Builder()");
+      }
     }
 
     /**
@@ -244,64 +146,68 @@ public final class ImmutableJiraIssue
      * @param instance The instance from which to copy values
      * @return {@code this} builder for use in a chained invocation
      */
-    public final Builder from(JiraIssue instance) {
+    @CanIgnoreReturnValue 
+    public final JiraIssue.Builder from(JiraIssue instance) {
       Objects.requireNonNull(instance, "instance");
-      id(instance.id());
-      self(instance.self());
-      fields(instance.fields());
-      return this;
+      setId(instance.getId());
+      setSelf(instance.getSelf());
+      setFields(instance.getFields());
+      return (JiraIssue.Builder) this;
     }
 
     /**
-     * Initializes the value for the {@link JiraIssue#id() id} attribute.
+     * Initializes the value for the {@link JiraIssue#getId() id} attribute.
      * @param id The value for id 
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("id")
-    public final Builder id(String id) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final JiraIssue.Builder setId(String id) {
       this.id = Objects.requireNonNull(id, "id");
       initBits &= ~INIT_BIT_ID;
-      return this;
+      return (JiraIssue.Builder) this;
     }
 
     /**
-     * Initializes the value for the {@link JiraIssue#self() self} attribute.
+     * Initializes the value for the {@link JiraIssue#getSelf() self} attribute.
      * @param self The value for self 
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("self")
-    public final Builder self(URI self) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final JiraIssue.Builder setSelf(URI self) {
       this.self = Objects.requireNonNull(self, "self");
       initBits &= ~INIT_BIT_SELF;
-      return this;
+      return (JiraIssue.Builder) this;
     }
 
     /**
-     * Initializes the value for the {@link JiraIssue#fields() fields} attribute.
+     * Initializes the value for the {@link JiraIssue#getFields() fields} attribute.
      * @param fields The value for fields 
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("fields")
-    public final Builder fields(ImmutableJiraIssueFields fields) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final JiraIssue.Builder setFields(JiraIssueFields fields) {
       this.fields = Objects.requireNonNull(fields, "fields");
       initBits &= ~INIT_BIT_FIELDS;
-      return this;
+      return (JiraIssue.Builder) this;
     }
 
     /**
-     * Builds a new {@link ImmutableJiraIssue ImmutableJiraIssue}.
+     * Builds a new {@link JiraIssue JiraIssue}.
      * @return An immutable instance of JiraIssue
      * @throws java.lang.IllegalStateException if any required attributes are missing
      */
-    public ImmutableJiraIssue build() {
+    public JiraIssue build() {
       if (initBits != 0) {
         throw new IllegalStateException(formatRequiredAttributesMessage());
       }
-      return new ImmutableJiraIssue(id, self, fields);
+      return new ImmutableJiraIssue(this);
     }
 
     private String formatRequiredAttributesMessage() {
-      List<String> attributes = new ArrayList<String>();
+      List<String> attributes = Lists.newArrayList();
       if ((initBits & INIT_BIT_ID) != 0) attributes.add("id");
       if ((initBits & INIT_BIT_SELF) != 0) attributes.add("self");
       if ((initBits & INIT_BIT_FIELDS) != 0) attributes.add("fields");

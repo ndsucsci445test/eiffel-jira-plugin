@@ -1,15 +1,20 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import jdk.nashorn.internal.runtime.options.Option;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
+import java.util.Optional;
+
+
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
-@JsonInclude(JsonInclude.Include.NON_ABSENT)
-public interface Security {
-    Option<Sdm> sdm();
+@EiffelStyleImmutable
+@JsonSerialize(as = ImmutableSecurity.class)
+@JsonDeserialize(builder = Security.Builder.class)
+public abstract class Security {
+    public abstract Optional<Sdm> getSdm();
+
+    public static class Builder extends ImmutableSecurity.Builder {
+    }
 }

@@ -1,0 +1,25 @@
+package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.links;
+
+public enum LinkType {
+    CAUSE,
+    CONTEXT,
+    FLOW_CONTEXT,
+    ACTIVITY_EXECUTION,
+    PREVIOUS_ACTIVITY_EXECUTION,
+    PREVIOUS_VERSION,
+    COMPOSITION,
+    ENVIRONMENT,
+    ARTIFACT,
+    SUBJECT,
+    ELEMENT,
+    BASE,
+    CHANGE,
+    TEST_SUITE_EXECUTION,
+    TEST_CASE_EXECUTION,
+    IUT,
+    TERC,
+    MODIFIED_ANNOUNCEMENT,
+    SUB_CONFIDENCE_LEVEL,
+    REUSED_ARTIFACT,
+    VERIFICATION_BASIS,
+}

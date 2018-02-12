@@ -1,95 +1,67 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.ArrayList;
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import java.util.List;
 import java.util.Objects;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * Immutable implementation of {@link Serializer}.
  * <p>
  * Use the builder to create immutable instances:
- * {@code ImmutableSerializer.builder()}.
+ * {@code new Serializer.Builder()}.
  */
 @SuppressWarnings({"all"})
+@ParametersAreNonnullByDefault
 @Generated({"Immutables.generator", "Serializer"})
-public final class ImmutableSerializer
-    implements Serializer {
+@Immutable
+@CheckReturnValue
+final class ImmutableSerializer
+    extends Serializer {
   private final String groupId;
-  private final String artifcatId;
+  private final String artifactId;
   private final String version;
 
-  private ImmutableSerializer(String groupId, String artifcatId, String version) {
-    this.groupId = groupId;
-    this.artifcatId = artifcatId;
-    this.version = version;
+  private ImmutableSerializer(ImmutableSerializer.Builder builder) {
+    this.groupId = builder.groupId;
+    this.artifactId = builder.artifactId;
+    this.version = builder.version;
   }
 
   /**
    * @return The value of the {@code groupId} attribute
    */
-  @JsonProperty("groupId")
+  @JsonProperty
   @Override
-  public String groupId() {
+  public String getGroupId() {
     return groupId;
   }
 
   /**
-   * @return The value of the {@code artifcatId} attribute
+   * @return The value of the {@code artifactId} attribute
    */
-  @JsonProperty("artifcatId")
+  @JsonProperty
   @Override
-  public String artifcatId() {
-    return artifcatId;
+  public String getArtifactId() {
+    return artifactId;
   }
 
   /**
    * @return The value of the {@code version} attribute
    */
-  @JsonProperty("version")
+  @JsonProperty
   @Override
-  public String version() {
+  public String getVersion() {
     return version;
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link Serializer#groupId() groupId} attribute.
-   * An equals check used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for groupId
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableSerializer withGroupId(String value) {
-    if (this.groupId.equals(value)) return this;
-    String newValue = Objects.requireNonNull(value, "groupId");
-    return new ImmutableSerializer(newValue, this.artifcatId, this.version);
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link Serializer#artifcatId() artifcatId} attribute.
-   * An equals check used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for artifcatId
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableSerializer withArtifcatId(String value) {
-    if (this.artifcatId.equals(value)) return this;
-    String newValue = Objects.requireNonNull(value, "artifcatId");
-    return new ImmutableSerializer(this.groupId, newValue, this.version);
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link Serializer#version() version} attribute.
-   * An equals check used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for version
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableSerializer withVersion(String value) {
-    if (this.version.equals(value)) return this;
-    String newValue = Objects.requireNonNull(value, "version");
-    return new ImmutableSerializer(this.groupId, this.artifcatId, newValue);
   }
 
   /**
@@ -97,7 +69,7 @@ public final class ImmutableSerializer
    * @return {@code true} if {@code this} is equal to {@code another} instance
    */
   @Override
-  public boolean equals(Object another) {
+  public boolean equals(@Nullable Object another) {
     if (this == another) return true;
     return another instanceof ImmutableSerializer
         && equalTo((ImmutableSerializer) another);
@@ -105,19 +77,19 @@ public final class ImmutableSerializer
 
   private boolean equalTo(ImmutableSerializer another) {
     return groupId.equals(another.groupId)
-        && artifcatId.equals(another.artifcatId)
+        && artifactId.equals(another.artifactId)
         && version.equals(another.version);
   }
 
   /**
-   * Computes a hash code from attributes: {@code groupId}, {@code artifcatId}, {@code version}.
+   * Computes a hash code from attributes: {@code groupId}, {@code artifactId}, {@code version}.
    * @return hashCode value
    */
   @Override
   public int hashCode() {
     int h = 5381;
     h += (h << 5) + groupId.hashCode();
-    h += (h << 5) + artifcatId.hashCode();
+    h += (h << 5) + artifactId.hashCode();
     h += (h << 5) + version.hashCode();
     return h;
   }
@@ -128,107 +100,40 @@ public final class ImmutableSerializer
    */
   @Override
   public String toString() {
-    return "Serializer{"
-        + "groupId=" + groupId
-        + ", artifcatId=" + artifcatId
-        + ", version=" + version
-        + "}";
+    return MoreObjects.toStringHelper("Serializer")
+        .omitNullValues()
+        .add("groupId", groupId)
+        .add("artifactId", artifactId)
+        .add("version", version)
+        .toString();
   }
 
   /**
-   * Utility type used to correctly read immutable object from JSON representation.
-   * @deprecated Do not use this type directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonDeserialize
-  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
-  static final class Json implements Serializer {
-    String groupId;
-    String artifcatId;
-    String version;
-    @JsonProperty("groupId")
-    public void setGroupId(String groupId) {
-      this.groupId = groupId;
-    }
-    @JsonProperty("artifcatId")
-    public void setArtifcatId(String artifcatId) {
-      this.artifcatId = artifcatId;
-    }
-    @JsonProperty("version")
-    public void setVersion(String version) {
-      this.version = version;
-    }
-    @Override
-    public String groupId() { throw new UnsupportedOperationException(); }
-    @Override
-    public String artifcatId() { throw new UnsupportedOperationException(); }
-    @Override
-    public String version() { throw new UnsupportedOperationException(); }
-  }
-
-  /**
-   * @param json A JSON-bindable data structure
-   * @return An immutable value type
-   * @deprecated Do not use this method directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-  static ImmutableSerializer fromJson(Json json) {
-    ImmutableSerializer.Builder builder = ImmutableSerializer.builder();
-    if (json.groupId != null) {
-      builder.groupId(json.groupId);
-    }
-    if (json.artifcatId != null) {
-      builder.artifcatId(json.artifcatId);
-    }
-    if (json.version != null) {
-      builder.version(json.version);
-    }
-    return builder.build();
-  }
-
-  /**
-   * Creates an immutable copy of a {@link Serializer} value.
-   * Uses accessors to get values to initialize the new immutable instance.
-   * If an instance is already immutable, it is returned as is.
-   * @param instance The instance to copy
-   * @return A copied immutable Serializer instance
-   */
-  public static ImmutableSerializer copyOf(Serializer instance) {
-    if (instance instanceof ImmutableSerializer) {
-      return (ImmutableSerializer) instance;
-    }
-    return ImmutableSerializer.builder()
-        .from(instance)
-        .build();
-  }
-
-  /**
-   * Creates a builder for {@link ImmutableSerializer ImmutableSerializer}.
-   * @return A new ImmutableSerializer builder
-   */
-  public static ImmutableSerializer.Builder builder() {
-    return new ImmutableSerializer.Builder();
-  }
-
-  /**
-   * Builds instances of type {@link ImmutableSerializer ImmutableSerializer}.
+   * Builds instances of type {@link Serializer Serializer}.
    * Initialize attributes and then invoke the {@link #build()} method to create an
    * immutable instance.
    * <p><em>{@code Builder} is not thread-safe and generally should not be stored in a field or collection,
    * but instead used immediately to create instances.</em>
    */
-  public static final class Builder {
+  @NotThreadSafe
+  @EiffelStyleImmutable
+  public static class Builder {
     private static final long INIT_BIT_GROUP_ID = 0x1L;
-    private static final long INIT_BIT_ARTIFCAT_ID = 0x2L;
+    private static final long INIT_BIT_ARTIFACT_ID = 0x2L;
     private static final long INIT_BIT_VERSION = 0x4L;
     private long initBits = 0x7L;
 
-    private String groupId;
-    private String artifcatId;
-    private String version;
+    private @Nullable String groupId;
+    private @Nullable String artifactId;
+    private @Nullable String version;
 
-    private Builder() {
+    /**
+     * Creates a builder for {@link Serializer Serializer} instances.
+     */
+    public Builder() {
+      if (!(this instanceof Serializer.Builder)) {
+        throw new UnsupportedOperationException("Use: new Serializer.Builder()");
+      }
     }
 
     /**
@@ -238,66 +143,70 @@ public final class ImmutableSerializer
      * @param instance The instance from which to copy values
      * @return {@code this} builder for use in a chained invocation
      */
-    public final Builder from(Serializer instance) {
+    @CanIgnoreReturnValue 
+    public final Serializer.Builder from(Serializer instance) {
       Objects.requireNonNull(instance, "instance");
-      groupId(instance.groupId());
-      artifcatId(instance.artifcatId());
-      version(instance.version());
-      return this;
+      setGroupId(instance.getGroupId());
+      setArtifactId(instance.getArtifactId());
+      setVersion(instance.getVersion());
+      return (Serializer.Builder) this;
     }
 
     /**
-     * Initializes the value for the {@link Serializer#groupId() groupId} attribute.
+     * Initializes the value for the {@link Serializer#getGroupId() groupId} attribute.
      * @param groupId The value for groupId 
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("groupId")
-    public final Builder groupId(String groupId) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Serializer.Builder setGroupId(String groupId) {
       this.groupId = Objects.requireNonNull(groupId, "groupId");
       initBits &= ~INIT_BIT_GROUP_ID;
-      return this;
+      return (Serializer.Builder) this;
     }
 
     /**
-     * Initializes the value for the {@link Serializer#artifcatId() artifcatId} attribute.
-     * @param artifcatId The value for artifcatId 
+     * Initializes the value for the {@link Serializer#getArtifactId() artifactId} attribute.
+     * @param artifactId The value for artifactId 
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("artifcatId")
-    public final Builder artifcatId(String artifcatId) {
-      this.artifcatId = Objects.requireNonNull(artifcatId, "artifcatId");
-      initBits &= ~INIT_BIT_ARTIFCAT_ID;
-      return this;
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Serializer.Builder setArtifactId(String artifactId) {
+      this.artifactId = Objects.requireNonNull(artifactId, "artifactId");
+      initBits &= ~INIT_BIT_ARTIFACT_ID;
+      return (Serializer.Builder) this;
     }
 
     /**
-     * Initializes the value for the {@link Serializer#version() version} attribute.
+     * Initializes the value for the {@link Serializer#getVersion() version} attribute.
      * @param version The value for version 
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("version")
-    public final Builder version(String version) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Serializer.Builder setVersion(String version) {
       this.version = Objects.requireNonNull(version, "version");
       initBits &= ~INIT_BIT_VERSION;
-      return this;
+      return (Serializer.Builder) this;
     }
 
     /**
-     * Builds a new {@link ImmutableSerializer ImmutableSerializer}.
+     * Builds a new {@link Serializer Serializer}.
      * @return An immutable instance of Serializer
      * @throws java.lang.IllegalStateException if any required attributes are missing
      */
-    public ImmutableSerializer build() {
+    public Serializer build() {
       if (initBits != 0) {
         throw new IllegalStateException(formatRequiredAttributesMessage());
       }
-      return new ImmutableSerializer(groupId, artifcatId, version);
+      return new ImmutableSerializer(this);
     }
 
     private String formatRequiredAttributesMessage() {
-      List<String> attributes = new ArrayList<String>();
+      List<String> attributes = Lists.newArrayList();
       if ((initBits & INIT_BIT_GROUP_ID) != 0) attributes.add("groupId");
-      if ((initBits & INIT_BIT_ARTIFCAT_ID) != 0) attributes.add("artifcatId");
+      if ((initBits & INIT_BIT_ARTIFACT_ID) != 0) attributes.add("artifactId");
       if ((initBits & INIT_BIT_VERSION) != 0) attributes.add("version");
       return "Cannot build Serializer, some of required attributes are not set " + attributes;
     }

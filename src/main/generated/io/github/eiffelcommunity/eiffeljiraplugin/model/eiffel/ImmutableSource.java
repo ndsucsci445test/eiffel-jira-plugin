@@ -1,200 +1,88 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.MoreObjects;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import java.net.URI;
 import java.util.Objects;
 import java.util.Optional;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * Immutable implementation of {@link Source}.
  * <p>
  * Use the builder to create immutable instances:
- * {@code ImmutableSource.builder()}.
+ * {@code new Source.Builder()}.
  */
 @SuppressWarnings({"all"})
+@ParametersAreNonnullByDefault
 @Generated({"Immutables.generator", "Source"})
-public final class ImmutableSource implements Source {
-  private final String domainId;
-  private final String host;
-  private final String name;
-  private final Serializer serializer;
-  private final URI uri;
+@Immutable
+@CheckReturnValue
+final class ImmutableSource extends Source {
+  private final @Nullable String domainId;
+  private final @Nullable String host;
+  private final @Nullable String name;
+  private final @Nullable Serializer serializer;
+  private final @Nullable URI uri;
 
-  private ImmutableSource(
-      String domainId,
-      String host,
-      String name,
-      Serializer serializer,
-      URI uri) {
-    this.domainId = domainId;
-    this.host = host;
-    this.name = name;
-    this.serializer = serializer;
-    this.uri = uri;
+  private ImmutableSource(ImmutableSource.Builder builder) {
+    this.domainId = builder.domainId;
+    this.host = builder.host;
+    this.name = builder.name;
+    this.serializer = builder.serializer;
+    this.uri = builder.uri;
   }
 
   /**
    * @return The value of the {@code domainId} attribute
    */
-  @JsonProperty("domainId")
+  @JsonProperty
   @Override
-  public Optional<String> domainId() {
+  public Optional<String> getDomainId() {
     return Optional.ofNullable(domainId);
   }
 
   /**
    * @return The value of the {@code host} attribute
    */
-  @JsonProperty("host")
+  @JsonProperty
   @Override
-  public Optional<String> host() {
+  public Optional<String> getHost() {
     return Optional.ofNullable(host);
   }
 
   /**
    * @return The value of the {@code name} attribute
    */
-  @JsonProperty("name")
+  @JsonProperty
   @Override
-  public Optional<String> name() {
+  public Optional<String> getName() {
     return Optional.ofNullable(name);
   }
 
   /**
    * @return The value of the {@code serializer} attribute
    */
-  @JsonProperty("serializer")
+  @JsonProperty
   @Override
-  public Optional<Serializer> serializer() {
+  public Optional<Serializer> getSerializer() {
     return Optional.ofNullable(serializer);
   }
 
   /**
    * @return The value of the {@code uri} attribute
    */
-  @JsonProperty("uri")
+  @JsonProperty
   @Override
-  public Optional<URI> uri() {
+  public Optional<URI> getUri() {
     return Optional.ofNullable(uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting a <i>present</i> value for the optional {@link Source#domainId() domainId} attribute.
-   * @param value The value for domainId
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withDomainId(String value) {
-    String newValue = Objects.requireNonNull(value, "domainId");
-    if (Objects.equals(this.domainId, newValue)) return this;
-    return new ImmutableSource(newValue, this.host, this.name, this.serializer, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting an optional value for the {@link Source#domainId() domainId} attribute.
-   * An equality check is used on inner nullable value to prevent copying of the same value by returning {@code this}.
-   * @param optional A value for domainId
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withDomainId(Optional<String> optional) {
-    String value = optional.orElse(null);
-    if (Objects.equals(this.domainId, value)) return this;
-    return new ImmutableSource(value, this.host, this.name, this.serializer, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting a <i>present</i> value for the optional {@link Source#host() host} attribute.
-   * @param value The value for host
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withHost(String value) {
-    String newValue = Objects.requireNonNull(value, "host");
-    if (Objects.equals(this.host, newValue)) return this;
-    return new ImmutableSource(this.domainId, newValue, this.name, this.serializer, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting an optional value for the {@link Source#host() host} attribute.
-   * An equality check is used on inner nullable value to prevent copying of the same value by returning {@code this}.
-   * @param optional A value for host
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withHost(Optional<String> optional) {
-    String value = optional.orElse(null);
-    if (Objects.equals(this.host, value)) return this;
-    return new ImmutableSource(this.domainId, value, this.name, this.serializer, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting a <i>present</i> value for the optional {@link Source#name() name} attribute.
-   * @param value The value for name
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withName(String value) {
-    String newValue = Objects.requireNonNull(value, "name");
-    if (Objects.equals(this.name, newValue)) return this;
-    return new ImmutableSource(this.domainId, this.host, newValue, this.serializer, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting an optional value for the {@link Source#name() name} attribute.
-   * An equality check is used on inner nullable value to prevent copying of the same value by returning {@code this}.
-   * @param optional A value for name
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withName(Optional<String> optional) {
-    String value = optional.orElse(null);
-    if (Objects.equals(this.name, value)) return this;
-    return new ImmutableSource(this.domainId, this.host, value, this.serializer, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting a <i>present</i> value for the optional {@link Source#serializer() serializer} attribute.
-   * @param value The value for serializer
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withSerializer(Serializer value) {
-    Serializer newValue = Objects.requireNonNull(value, "serializer");
-    if (this.serializer == newValue) return this;
-    return new ImmutableSource(this.domainId, this.host, this.name, newValue, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting an optional value for the {@link Source#serializer() serializer} attribute.
-   * A shallow reference equality check is used on unboxed optional value to prevent copying of the same value by returning {@code this}.
-   * @param optional A value for serializer
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withSerializer(Optional<? extends Serializer> optional) {
-    Serializer value = optional.orElse(null);
-    if (this.serializer == value) return this;
-    return new ImmutableSource(this.domainId, this.host, this.name, value, this.uri);
-  }
-
-  /**
-   * Copy the current immutable object by setting a <i>present</i> value for the optional {@link Source#uri() uri} attribute.
-   * @param value The value for uri
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withUri(URI value) {
-    URI newValue = Objects.requireNonNull(value, "uri");
-    if (this.uri == newValue) return this;
-    return new ImmutableSource(this.domainId, this.host, this.name, this.serializer, newValue);
-  }
-
-  /**
-   * Copy the current immutable object by setting an optional value for the {@link Source#uri() uri} attribute.
-   * A shallow reference equality check is used on unboxed optional value to prevent copying of the same value by returning {@code this}.
-   * @param optional A value for uri
-   * @return A modified copy of {@code this} object
-   */
-  public final ImmutableSource withUri(Optional<? extends URI> optional) {
-    URI value = optional.orElse(null);
-    if (this.uri == value) return this;
-    return new ImmutableSource(this.domainId, this.host, this.name, this.serializer, value);
   }
 
   /**
@@ -202,7 +90,7 @@ public final class ImmutableSource implements Source {
    * @return {@code true} if {@code this} is equal to {@code another} instance
    */
   @Override
-  public boolean equals(Object another) {
+  public boolean equals(@Nullable Object another) {
     if (this == another) return true;
     return another instanceof ImmutableSource
         && equalTo((ImmutableSource) another);
@@ -237,140 +125,39 @@ public final class ImmutableSource implements Source {
    */
   @Override
   public String toString() {
-    StringBuilder builder = new StringBuilder("Source{");
-    if (domainId != null) {
-      builder.append("domainId=").append(domainId);
-    }
-    if (host != null) {
-      if (builder.length() > 7) builder.append(", ");
-      builder.append("host=").append(host);
-    }
-    if (name != null) {
-      if (builder.length() > 7) builder.append(", ");
-      builder.append("name=").append(name);
-    }
-    if (serializer != null) {
-      if (builder.length() > 7) builder.append(", ");
-      builder.append("serializer=").append(serializer);
-    }
-    if (uri != null) {
-      if (builder.length() > 7) builder.append(", ");
-      builder.append("uri=").append(uri);
-    }
-    return builder.append("}").toString();
+    return MoreObjects.toStringHelper("Source")
+        .omitNullValues()
+        .add("domainId", domainId)
+        .add("host", host)
+        .add("name", name)
+        .add("serializer", serializer)
+        .add("uri", uri)
+        .toString();
   }
 
   /**
-   * Utility type used to correctly read immutable object from JSON representation.
-   * @deprecated Do not use this type directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonDeserialize
-  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
-  static final class Json implements Source {
-    Optional<String> domainId = Optional.empty();
-    Optional<String> host = Optional.empty();
-    Optional<String> name = Optional.empty();
-    Optional<Serializer> serializer = Optional.empty();
-    Optional<URI> uri = Optional.empty();
-    @JsonProperty("domainId")
-    public void setDomainId(Optional<String> domainId) {
-      this.domainId = domainId;
-    }
-    @JsonProperty("host")
-    public void setHost(Optional<String> host) {
-      this.host = host;
-    }
-    @JsonProperty("name")
-    public void setName(Optional<String> name) {
-      this.name = name;
-    }
-    @JsonProperty("serializer")
-    public void setSerializer(Optional<Serializer> serializer) {
-      this.serializer = serializer;
-    }
-    @JsonProperty("uri")
-    public void setUri(Optional<URI> uri) {
-      this.uri = uri;
-    }
-    @Override
-    public Optional<String> domainId() { throw new UnsupportedOperationException(); }
-    @Override
-    public Optional<String> host() { throw new UnsupportedOperationException(); }
-    @Override
-    public Optional<String> name() { throw new UnsupportedOperationException(); }
-    @Override
-    public Optional<Serializer> serializer() { throw new UnsupportedOperationException(); }
-    @Override
-    public Optional<URI> uri() { throw new UnsupportedOperationException(); }
-  }
-
-  /**
-   * @param json A JSON-bindable data structure
-   * @return An immutable value type
-   * @deprecated Do not use this method directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-  static ImmutableSource fromJson(Json json) {
-    ImmutableSource.Builder builder = ImmutableSource.builder();
-    if (json.domainId != null) {
-      builder.domainId(json.domainId);
-    }
-    if (json.host != null) {
-      builder.host(json.host);
-    }
-    if (json.name != null) {
-      builder.name(json.name);
-    }
-    if (json.serializer != null) {
-      builder.serializer(json.serializer);
-    }
-    if (json.uri != null) {
-      builder.uri(json.uri);
-    }
-    return builder.build();
-  }
-
-  /**
-   * Creates an immutable copy of a {@link Source} value.
-   * Uses accessors to get values to initialize the new immutable instance.
-   * If an instance is already immutable, it is returned as is.
-   * @param instance The instance to copy
-   * @return A copied immutable Source instance
-   */
-  public static ImmutableSource copyOf(Source instance) {
-    if (instance instanceof ImmutableSource) {
-      return (ImmutableSource) instance;
-    }
-    return ImmutableSource.builder()
-        .from(instance)
-        .build();
-  }
-
-  /**
-   * Creates a builder for {@link ImmutableSource ImmutableSource}.
-   * @return A new ImmutableSource builder
-   */
-  public static ImmutableSource.Builder builder() {
-    return new ImmutableSource.Builder();
-  }
-
-  /**
-   * Builds instances of type {@link ImmutableSource ImmutableSource}.
+   * Builds instances of type {@link Source Source}.
    * Initialize attributes and then invoke the {@link #build()} method to create an
    * immutable instance.
    * <p><em>{@code Builder} is not thread-safe and generally should not be stored in a field or collection,
    * but instead used immediately to create instances.</em>
    */
-  public static final class Builder {
-    private String domainId;
-    private String host;
-    private String name;
-    private Serializer serializer;
-    private URI uri;
+  @NotThreadSafe
+  @EiffelStyleImmutable
+  public static class Builder {
+    private @Nullable String domainId;
+    private @Nullable String host;
+    private @Nullable String name;
+    private @Nullable Serializer serializer;
+    private @Nullable URI uri;
 
-    private Builder() {
+    /**
+     * Creates a builder for {@link Source Source} instances.
+     */
+    public Builder() {
+      if (!(this instanceof Source.Builder)) {
+        throw new UnsupportedOperationException("Use: new Source.Builder()");
+      }
     }
 
     /**
@@ -380,143 +167,154 @@ public final class ImmutableSource implements Source {
      * @param instance The instance from which to copy values
      * @return {@code this} builder for use in a chained invocation
      */
-    public final Builder from(Source instance) {
+    @CanIgnoreReturnValue 
+    public final Source.Builder from(Source instance) {
       Objects.requireNonNull(instance, "instance");
-      Optional<String> domainIdOptional = instance.domainId();
+      Optional<String> domainIdOptional = instance.getDomainId();
       if (domainIdOptional.isPresent()) {
-        domainId(domainIdOptional);
+        setDomainId(domainIdOptional);
       }
-      Optional<String> hostOptional = instance.host();
+      Optional<String> hostOptional = instance.getHost();
       if (hostOptional.isPresent()) {
-        host(hostOptional);
+        setHost(hostOptional);
       }
-      Optional<String> nameOptional = instance.name();
+      Optional<String> nameOptional = instance.getName();
       if (nameOptional.isPresent()) {
-        name(nameOptional);
+        setName(nameOptional);
       }
-      Optional<Serializer> serializerOptional = instance.serializer();
+      Optional<Serializer> serializerOptional = instance.getSerializer();
       if (serializerOptional.isPresent()) {
-        serializer(serializerOptional);
+        setSerializer(serializerOptional);
       }
-      Optional<URI> uriOptional = instance.uri();
+      Optional<URI> uriOptional = instance.getUri();
       if (uriOptional.isPresent()) {
-        uri(uriOptional);
+        setUri(uriOptional);
       }
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#domainId() domainId} to domainId.
+     * Initializes the optional value {@link Source#getDomainId() domainId} to domainId.
      * @param domainId The value for domainId
      * @return {@code this} builder for chained invocation
      */
-    public final Builder domainId(String domainId) {
+    @CanIgnoreReturnValue 
+    public final Source.Builder setDomainId(String domainId) {
       this.domainId = Objects.requireNonNull(domainId, "domainId");
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#domainId() domainId} to domainId.
+     * Initializes the optional value {@link Source#getDomainId() domainId} to domainId.
      * @param domainId The value for domainId
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("domainId")
-    public final Builder domainId(Optional<String> domainId) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Source.Builder setDomainId(Optional<String> domainId) {
       this.domainId = domainId.orElse(null);
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#host() host} to host.
+     * Initializes the optional value {@link Source#getHost() host} to host.
      * @param host The value for host
      * @return {@code this} builder for chained invocation
      */
-    public final Builder host(String host) {
+    @CanIgnoreReturnValue 
+    public final Source.Builder setHost(String host) {
       this.host = Objects.requireNonNull(host, "host");
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#host() host} to host.
+     * Initializes the optional value {@link Source#getHost() host} to host.
      * @param host The value for host
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("host")
-    public final Builder host(Optional<String> host) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Source.Builder setHost(Optional<String> host) {
       this.host = host.orElse(null);
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#name() name} to name.
+     * Initializes the optional value {@link Source#getName() name} to name.
      * @param name The value for name
      * @return {@code this} builder for chained invocation
      */
-    public final Builder name(String name) {
+    @CanIgnoreReturnValue 
+    public final Source.Builder setName(String name) {
       this.name = Objects.requireNonNull(name, "name");
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#name() name} to name.
+     * Initializes the optional value {@link Source#getName() name} to name.
      * @param name The value for name
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("name")
-    public final Builder name(Optional<String> name) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Source.Builder setName(Optional<String> name) {
       this.name = name.orElse(null);
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#serializer() serializer} to serializer.
+     * Initializes the optional value {@link Source#getSerializer() serializer} to serializer.
      * @param serializer The value for serializer
      * @return {@code this} builder for chained invocation
      */
-    public final Builder serializer(Serializer serializer) {
+    @CanIgnoreReturnValue 
+    public final Source.Builder setSerializer(Serializer serializer) {
       this.serializer = Objects.requireNonNull(serializer, "serializer");
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#serializer() serializer} to serializer.
+     * Initializes the optional value {@link Source#getSerializer() serializer} to serializer.
      * @param serializer The value for serializer
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("serializer")
-    public final Builder serializer(Optional<? extends Serializer> serializer) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Source.Builder setSerializer(Optional<? extends Serializer> serializer) {
       this.serializer = serializer.orElse(null);
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#uri() uri} to uri.
+     * Initializes the optional value {@link Source#getUri() uri} to uri.
      * @param uri The value for uri
      * @return {@code this} builder for chained invocation
      */
-    public final Builder uri(URI uri) {
+    @CanIgnoreReturnValue 
+    public final Source.Builder setUri(URI uri) {
       this.uri = Objects.requireNonNull(uri, "uri");
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Initializes the optional value {@link Source#uri() uri} to uri.
+     * Initializes the optional value {@link Source#getUri() uri} to uri.
      * @param uri The value for uri
      * @return {@code this} builder for use in a chained invocation
      */
-    @JsonProperty("uri")
-    public final Builder uri(Optional<? extends URI> uri) {
+    @CanIgnoreReturnValue 
+    @JsonProperty
+    public final Source.Builder setUri(Optional<? extends URI> uri) {
       this.uri = uri.orElse(null);
-      return this;
+      return (Source.Builder) this;
     }
 
     /**
-     * Builds a new {@link ImmutableSource ImmutableSource}.
+     * Builds a new {@link Source Source}.
      * @return An immutable instance of Source
      * @throws java.lang.IllegalStateException if any required attributes are missing
      */
-    public ImmutableSource build() {
-      return new ImmutableSource(domainId, host, name, serializer, uri);
+    public Source build() {
+      return new ImmutableSource(this);
     }
   }
 }

@@ -1,8 +1,8 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.ImmutableEiffelIssueDefinedEvent;
-import io.github.eiffelcommunity.eiffeljiraplugin.model.jira.ImmutableJiraIssueRelatedEvent;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefinedEvent100;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueRelatedEvent;
 import io.github.eiffelcommunity.eiffeljiraplugin.service.JiraEiffelMappingService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,13 +26,13 @@ public class JiraWebhookController {
     }
 
     @RequestMapping(value = "/webhooks/jira", method = {RequestMethod.POST})
-    public ResponseEntity<?> jiraWebhookEvent(@RequestBody ImmutableJiraIssueRelatedEvent jiraEvent) {
+    public ResponseEntity<?> jiraWebhookEvent(@RequestBody JiraIssueRelatedEvent jiraEvent) {
 
         // Right now we're only interested in issue_created events, as we're only
         // defining EiffelIssueDefinedEvent.
-        switch (jiraEvent.eventType()) {
+        switch (jiraEvent.getEventType()) {
             case JIRA_WEBHOOK_EVENT_TYPE_ISSUE_CREATED:
-                ImmutableEiffelIssueDefinedEvent eiffelEvent = mappingService.toEiffelIssueDefinedEvent(jiraEvent.issue());
+                EiffelIssueDefinedEvent100 eiffelEvent = mappingService.toEiffelIssueDefinedEvent100(jiraEvent.getIssue());
                 // TODO: Send Eiffel event to Rabbit
                 try {
                     mapper.findAndRegisterModules();

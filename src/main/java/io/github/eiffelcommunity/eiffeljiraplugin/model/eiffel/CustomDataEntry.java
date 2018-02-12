@@ -7,15 +7,14 @@ import org.immutables.value.Value;
 
 @Value.Immutable
 @EiffelStyleTuple
-@JsonSerialize(as = ImmutableSdm.class)
-@JsonDeserialize(as = ImmutableSdm.class)
-public abstract class Sdm {
-    public static Sdm of(String authorIdentity, String encryptedDigest) {
-        return ImmutableSdm.of(authorIdentity, encryptedDigest);
+@JsonSerialize(as = ImmutableCustomDataEntry.class)
+@JsonDeserialize(as = ImmutableCustomDataEntry.class)
+public abstract class CustomDataEntry {
+    public static CustomDataEntry of(String key, Object value) {
+        return ImmutableCustomDataEntry.of(key, value);
     }
 
-    public abstract String getAuthorIdentity();
+    public abstract String getKey();
 
-    public abstract String getEncryptedDigest();
-
+    public abstract Object getValue();
 }

@@ -1,30 +1,38 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.model.jira;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.ArrayList;
+import com.google.common.base.MoreObjects;
+import com.google.common.collect.Lists;
+import com.google.errorprone.annotations.CanIgnoreReturnValue;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import java.util.List;
 import java.util.Objects;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.concurrent.Immutable;
+import javax.annotation.concurrent.NotThreadSafe;
 
 /**
  * Immutable implementation of {@link JiraFieldsIssueType}.
  * <p>
  * Use the builder to create immutable instances:
- * {@code ImmutableJiraFieldsIssueType.builder()}.
+ * {@code new JiraFieldsIssueType.Builder()}.
  */
 @SuppressWarnings({"all"})
+@ParametersAreNonnullByDefault
 @Generated({"Immutables.generator", "JiraFieldsIssueType"})
+@Immutable
+@CheckReturnValue
 @JsonIgnoreProperties(ignoreUnknown = true)
-public final class ImmutableJiraFieldsIssueType
-    implements JiraFieldsIssueType {
+final class ImmutableJiraFieldsIssueType
+    extends JiraFieldsIssueType {
   private final JiraIssueType issueType;
 
-  private ImmutableJiraFieldsIssueType(JiraIssueType issueType) {
-    this.issueType = issueType;
+  private ImmutableJiraFieldsIssueType(ImmutableJiraFieldsIssueType.Builder builder) {
+    this.issueType = builder.issueType;
   }
 
   /**
@@ -32,20 +40,8 @@ public final class ImmutableJiraFieldsIssueType
    */
   @JsonProperty("name")
   @Override
-  public JiraIssueType issueType() {
+  public JiraIssueType getIssueType() {
     return issueType;
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link JiraFieldsIssueType#issueType() issueType} attribute.
-   * A value equality check is used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for issueType
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableJiraFieldsIssueType withIssueType(JiraIssueType value) {
-    if (this.issueType == value) return this;
-    JiraIssueType newValue = Objects.requireNonNull(value, "issueType");
-    return new ImmutableJiraFieldsIssueType(newValue);
   }
 
   /**
@@ -53,7 +49,7 @@ public final class ImmutableJiraFieldsIssueType
    * @return {@code true} if {@code this} is equal to {@code another} instance
    */
   @Override
-  public boolean equals(Object another) {
+  public boolean equals(@Nullable Object another) {
     if (this == another) return true;
     return another instanceof ImmutableJiraFieldsIssueType
         && equalTo((ImmutableJiraFieldsIssueType) another);
@@ -80,81 +76,35 @@ public final class ImmutableJiraFieldsIssueType
    */
   @Override
   public String toString() {
-    return "JiraFieldsIssueType{"
-        + "issueType=" + issueType
-        + "}";
+    return MoreObjects.toStringHelper("JiraFieldsIssueType")
+        .omitNullValues()
+        .add("issueType", issueType)
+        .toString();
   }
 
   /**
-   * Utility type used to correctly read immutable object from JSON representation.
-   * @deprecated Do not use this type directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonDeserialize
-  @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
-  static final class Json implements JiraFieldsIssueType {
-    JiraIssueType issueType;
-    @JsonProperty("name")
-    public void setIssueType(JiraIssueType issueType) {
-      this.issueType = issueType;
-    }
-    @Override
-    public JiraIssueType issueType() { throw new UnsupportedOperationException(); }
-  }
-
-  /**
-   * @param json A JSON-bindable data structure
-   * @return An immutable value type
-   * @deprecated Do not use this method directly, it exists only for the <em>Jackson</em>-binding infrastructure
-   */
-  @Deprecated
-  @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
-  static ImmutableJiraFieldsIssueType fromJson(Json json) {
-    ImmutableJiraFieldsIssueType.Builder builder = ImmutableJiraFieldsIssueType.builder();
-    if (json.issueType != null) {
-      builder.issueType(json.issueType);
-    }
-    return builder.build();
-  }
-
-  /**
-   * Creates an immutable copy of a {@link JiraFieldsIssueType} value.
-   * Uses accessors to get values to initialize the new immutable instance.
-   * If an instance is already immutable, it is returned as is.
-   * @param instance The instance to copy
-   * @return A copied immutable JiraFieldsIssueType instance
-   */
-  public static ImmutableJiraFieldsIssueType copyOf(JiraFieldsIssueType instance) {
-    if (instance instanceof ImmutableJiraFieldsIssueType) {
-      return (ImmutableJiraFieldsIssueType) instance;
-    }
-    return ImmutableJiraFieldsIssueType.builder()
-        .from(instance)
-        .build();
-  }
-
-  /**
-   * Creates a builder for {@link ImmutableJiraFieldsIssueType ImmutableJiraFieldsIssueType}.
-   * @return A new ImmutableJiraFieldsIssueType builder
-   */
-  public static ImmutableJiraFieldsIssueType.Builder builder() {
-    return new ImmutableJiraFieldsIssueType.Builder();
-  }
-
-  /**
-   * Builds instances of type {@link ImmutableJiraFieldsIssueType ImmutableJiraFieldsIssueType}.
+   * Builds instances of type {@link JiraFieldsIssueType JiraFieldsIssueType}.
    * Initialize attributes and then invoke the {@link #build()} method to create an
    * immutable instance.
    * <p><em>{@code Builder} is not thread-safe and generally should not be stored in a field or collection,
    * but instead used immediately to create instances.</em>
    */
-  public static final class Builder {
+  @NotThreadSafe
+  @EiffelStyleImmutable
+  @JsonIgnoreProperties(ignoreUnknown = true)
+  public static class Builder {
     private static final long INIT_BIT_ISSUE_TYPE = 0x1L;
     private long initBits = 0x1L;
 
-    private JiraIssueType issueType;
+    private @Nullable JiraIssueType issueType;
 
-    private Builder() {
+    /**
+     * Creates a builder for {@link JiraFieldsIssueType JiraFieldsIssueType} instances.
+     */
+    public Builder() {
+      if (!(this instanceof JiraFieldsIssueType.Builder)) {
+        throw new UnsupportedOperationException("Use: new JiraFieldsIssueType.Builder()");
+      }
     }
 
     /**
@@ -164,38 +114,40 @@ public final class ImmutableJiraFieldsIssueType
      * @param instance The instance from which to copy values
      * @return {@code this} builder for use in a chained invocation
      */
-    public final Builder from(JiraFieldsIssueType instance) {
+    @CanIgnoreReturnValue 
+    public final JiraFieldsIssueType.Builder from(JiraFieldsIssueType instance) {
       Objects.requireNonNull(instance, "instance");
-      issueType(instance.issueType());
-      return this;
+      setIssueType(instance.getIssueType());
+      return (JiraFieldsIssueType.Builder) this;
     }
 
     /**
-     * Initializes the value for the {@link JiraFieldsIssueType#issueType() issueType} attribute.
+     * Initializes the value for the {@link JiraFieldsIssueType#getIssueType() issueType} attribute.
      * @param issueType The value for issueType 
      * @return {@code this} builder for use in a chained invocation
      */
+    @CanIgnoreReturnValue 
     @JsonProperty("name")
-    public final Builder issueType(JiraIssueType issueType) {
+    public final JiraFieldsIssueType.Builder setIssueType(JiraIssueType issueType) {
       this.issueType = Objects.requireNonNull(issueType, "issueType");
       initBits &= ~INIT_BIT_ISSUE_TYPE;
-      return this;
+      return (JiraFieldsIssueType.Builder) this;
     }
 
     /**
-     * Builds a new {@link ImmutableJiraFieldsIssueType ImmutableJiraFieldsIssueType}.
+     * Builds a new {@link JiraFieldsIssueType JiraFieldsIssueType}.
      * @return An immutable instance of JiraFieldsIssueType
      * @throws java.lang.IllegalStateException if any required attributes are missing
      */
-    public ImmutableJiraFieldsIssueType build() {
+    public JiraFieldsIssueType build() {
       if (initBits != 0) {
         throw new IllegalStateException(formatRequiredAttributesMessage());
       }
-      return new ImmutableJiraFieldsIssueType(issueType);
+      return new ImmutableJiraFieldsIssueType(this);
     }
 
     private String formatRequiredAttributesMessage() {
-      List<String> attributes = new ArrayList<String>();
+      List<String> attributes = Lists.newArrayList();
       if ((initBits & INIT_BIT_ISSUE_TYPE) != 0) attributes.add("issueType");
       return "Cannot build JiraFieldsIssueType, some of required attributes are not set " + attributes;
     }

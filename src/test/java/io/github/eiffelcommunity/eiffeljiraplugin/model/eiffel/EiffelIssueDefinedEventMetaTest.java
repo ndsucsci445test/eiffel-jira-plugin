@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
-public class ImmutableEiffelIssueDefinedEventMetaTest {
+public class EiffelIssueDefinedEventMetaTest {
 
     @Before
     public void setUp() {
@@ -20,8 +20,8 @@ public class ImmutableEiffelIssueDefinedEventMetaTest {
 
     @Test
     public void noArgsBuilderHasOnlyDefaultFields() {
-        ImmutableEiffelIssueDefinedEventMeta meta = ImmutableEiffelIssueDefinedEventMeta.builder().build();
-        Assert.assertFalse(meta.source().isPresent());
-        Assert.assertFalse(meta.tags().isPresent());
+        EiffelIssueDefinedEvent100Meta meta = new EiffelIssueDefinedEvent100Meta.Builder().build();
+        Assert.assertFalse(meta.getSource().isPresent());
+        Assert.assertFalse(meta.getTags().isPresent());
     }
 }

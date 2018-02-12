@@ -1,25 +1,28 @@
 package io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
 import java.net.URI;
 import java.util.Optional;
 
 @Value.Immutable
+@EiffelStyleImmutable
 @JsonSerialize
-@JsonDeserialize
-@JsonInclude(JsonInclude.Include.NON_ABSENT)
-public interface Source {
-    Optional<String> domainId();
+@JsonDeserialize(builder = Source.Builder.class)
+public abstract class Source {
+    public abstract Optional<String> getDomainId();
 
-    Optional<String> host();
+    public abstract Optional<String> getHost();
 
-    Optional<String> name();
+    public abstract Optional<String> getName();
 
-    Optional<Serializer> serializer();
+    public abstract Optional<Serializer> getSerializer();
 
-    Optional<URI> uri();
+    public abstract Optional<URI> getUri();
+
+    public static class Builder extends ImmutableSource.Builder {
+    }
 }

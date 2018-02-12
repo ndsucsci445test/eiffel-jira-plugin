@@ -4,68 +4,50 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.base.MoreObjects;
 import java.util.Objects;
+import javax.annotation.CheckReturnValue;
 import javax.annotation.Generated;
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.concurrent.Immutable;
 
 /**
  * Immutable implementation of {@link Sdm}.
  * <p>
- * Use the builder to create immutable instances:
- * {@code ImmutableSdm.builder()}.
+ * Use the static factory method to create immutable instances:
+ * {@code ImmutableSdm.of()}.
  */
 @SuppressWarnings({"all"})
+@ParametersAreNonnullByDefault
 @Generated({"Immutables.generator", "Sdm"})
-public final class ImmutableSdm implements Sdm {
+@Immutable
+@CheckReturnValue
+final class ImmutableSdm extends Sdm {
   private final String authorIdentity;
   private final String encryptedDigest;
 
   private ImmutableSdm(String authorIdentity, String encryptedDigest) {
-    this.authorIdentity = authorIdentity;
-    this.encryptedDigest = encryptedDigest;
+    this.authorIdentity = Objects.requireNonNull(authorIdentity, "authorIdentity");
+    this.encryptedDigest = Objects.requireNonNull(encryptedDigest, "encryptedDigest");
   }
 
   /**
    * @return The value of the {@code authorIdentity} attribute
    */
-  @JsonProperty("authorIdentity")
+  @JsonProperty
   @Override
-  public String authorIdentity() {
+  public String getAuthorIdentity() {
     return authorIdentity;
   }
 
   /**
    * @return The value of the {@code encryptedDigest} attribute
    */
-  @JsonProperty("encryptedDigest")
+  @JsonProperty
   @Override
-  public String encryptedDigest() {
+  public String getEncryptedDigest() {
     return encryptedDigest;
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link Sdm#authorIdentity() authorIdentity} attribute.
-   * An equals check used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for authorIdentity
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableSdm withAuthorIdentity(String value) {
-    if (this.authorIdentity.equals(value)) return this;
-    String newValue = Objects.requireNonNull(value, "authorIdentity");
-    return new ImmutableSdm(newValue, this.encryptedDigest);
-  }
-
-  /**
-   * Copy the current immutable object by setting a value for the {@link Sdm#encryptedDigest() encryptedDigest} attribute.
-   * An equals check used to prevent copying of the same value by returning {@code this}.
-   * @param value A new value for encryptedDigest
-   * @return A modified copy of the {@code this} object
-   */
-  public final ImmutableSdm withEncryptedDigest(String value) {
-    if (this.encryptedDigest.equals(value)) return this;
-    String newValue = Objects.requireNonNull(value, "encryptedDigest");
-    return new ImmutableSdm(this.authorIdentity, newValue);
   }
 
   /**
@@ -73,7 +55,7 @@ public final class ImmutableSdm implements Sdm {
    * @return {@code true} if {@code this} is equal to {@code another} instance
    */
   @Override
-  public boolean equals(Object another) {
+  public boolean equals(@Nullable Object another) {
     if (this == another) return true;
     return another instanceof ImmutableSdm
         && equalTo((ImmutableSdm) another);
@@ -102,10 +84,11 @@ public final class ImmutableSdm implements Sdm {
    */
   @Override
   public String toString() {
-    return "Sdm{"
-        + "authorIdentity=" + authorIdentity
-        + ", encryptedDigest=" + encryptedDigest
-        + "}";
+    return MoreObjects.toStringHelper("Sdm")
+        .omitNullValues()
+        .add("authorIdentity", authorIdentity)
+        .add("encryptedDigest", encryptedDigest)
+        .toString();
   }
 
   /**
@@ -115,21 +98,21 @@ public final class ImmutableSdm implements Sdm {
   @Deprecated
   @JsonDeserialize
   @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.NONE)
-  static final class Json implements Sdm {
-    String authorIdentity;
-    String encryptedDigest;
-    @JsonProperty("authorIdentity")
+  static final class Json extends Sdm {
+    @Nullable String authorIdentity;
+    @Nullable String encryptedDigest;
+    @JsonProperty
     public void setAuthorIdentity(String authorIdentity) {
       this.authorIdentity = authorIdentity;
     }
-    @JsonProperty("encryptedDigest")
+    @JsonProperty
     public void setEncryptedDigest(String encryptedDigest) {
       this.encryptedDigest = encryptedDigest;
     }
     @Override
-    public String authorIdentity() { throw new UnsupportedOperationException(); }
+    public String getAuthorIdentity() { throw new UnsupportedOperationException(); }
     @Override
-    public String encryptedDigest() { throw new UnsupportedOperationException(); }
+    public String getEncryptedDigest() { throw new UnsupportedOperationException(); }
   }
 
   /**
@@ -140,113 +123,17 @@ public final class ImmutableSdm implements Sdm {
   @Deprecated
   @JsonCreator(mode = JsonCreator.Mode.DELEGATING)
   static ImmutableSdm fromJson(Json json) {
-    ImmutableSdm.Builder builder = ImmutableSdm.builder();
-    if (json.authorIdentity != null) {
-      builder.authorIdentity(json.authorIdentity);
-    }
-    if (json.encryptedDigest != null) {
-      builder.encryptedDigest(json.encryptedDigest);
-    }
-    return builder.build();
+    ImmutableSdm instance = (ImmutableSdm) ImmutableSdm.of(json.authorIdentity, json.encryptedDigest);
+    return instance;
   }
 
   /**
-   * Creates an immutable copy of a {@link Sdm} value.
-   * Uses accessors to get values to initialize the new immutable instance.
-   * If an instance is already immutable, it is returned as is.
-   * @param instance The instance to copy
-   * @return A copied immutable Sdm instance
+   * Construct a new immutable {@code Sdm} instance.
+   * @param authorIdentity The value for the {@code authorIdentity} attribute
+   * @param encryptedDigest The value for the {@code encryptedDigest} attribute
+   * @return An immutable Sdm instance
    */
-  public static ImmutableSdm copyOf(Sdm instance) {
-    if (instance instanceof ImmutableSdm) {
-      return (ImmutableSdm) instance;
-    }
-    return ImmutableSdm.builder()
-        .from(instance)
-        .build();
-  }
-
-  /**
-   * Creates a builder for {@link ImmutableSdm ImmutableSdm}.
-   * @return A new ImmutableSdm builder
-   */
-  public static ImmutableSdm.Builder builder() {
-    return new ImmutableSdm.Builder();
-  }
-
-  /**
-   * Builds instances of type {@link ImmutableSdm ImmutableSdm}.
-   * Initialize attributes and then invoke the {@link #build()} method to create an
-   * immutable instance.
-   * <p><em>{@code Builder} is not thread-safe and generally should not be stored in a field or collection,
-   * but instead used immediately to create instances.</em>
-   */
-  public static final class Builder {
-    private static final long INIT_BIT_AUTHOR_IDENTITY = 0x1L;
-    private static final long INIT_BIT_ENCRYPTED_DIGEST = 0x2L;
-    private long initBits = 0x3L;
-
-    private String authorIdentity;
-    private String encryptedDigest;
-
-    private Builder() {
-    }
-
-    /**
-     * Fill a builder with attribute values from the provided {@code Sdm} instance.
-     * Regular attribute values will be replaced with those from the given instance.
-     * Absent optional values will not replace present values.
-     * @param instance The instance from which to copy values
-     * @return {@code this} builder for use in a chained invocation
-     */
-    public final Builder from(Sdm instance) {
-      Objects.requireNonNull(instance, "instance");
-      authorIdentity(instance.authorIdentity());
-      encryptedDigest(instance.encryptedDigest());
-      return this;
-    }
-
-    /**
-     * Initializes the value for the {@link Sdm#authorIdentity() authorIdentity} attribute.
-     * @param authorIdentity The value for authorIdentity 
-     * @return {@code this} builder for use in a chained invocation
-     */
-    @JsonProperty("authorIdentity")
-    public final Builder authorIdentity(String authorIdentity) {
-      this.authorIdentity = Objects.requireNonNull(authorIdentity, "authorIdentity");
-      initBits &= ~INIT_BIT_AUTHOR_IDENTITY;
-      return this;
-    }
-
-    /**
-     * Initializes the value for the {@link Sdm#encryptedDigest() encryptedDigest} attribute.
-     * @param encryptedDigest The value for encryptedDigest 
-     * @return {@code this} builder for use in a chained invocation
-     */
-    @JsonProperty("encryptedDigest")
-    public final Builder encryptedDigest(String encryptedDigest) {
-      this.encryptedDigest = Objects.requireNonNull(encryptedDigest, "encryptedDigest");
-      initBits &= ~INIT_BIT_ENCRYPTED_DIGEST;
-      return this;
-    }
-
-    /**
-     * Builds a new {@link ImmutableSdm ImmutableSdm}.
-     * @return An immutable instance of Sdm
-     * @throws java.lang.IllegalStateException if any required attributes are missing
-     */
-    public ImmutableSdm build() {
-      if (initBits != 0) {
-        throw new IllegalStateException(formatRequiredAttributesMessage());
-      }
-      return new ImmutableSdm(authorIdentity, encryptedDigest);
-    }
-
-    private String formatRequiredAttributesMessage() {
-      List<String> attributes = new ArrayList<String>();
-      if ((initBits & INIT_BIT_AUTHOR_IDENTITY) != 0) attributes.add("authorIdentity");
-      if ((initBits & INIT_BIT_ENCRYPTED_DIGEST) != 0) attributes.add("encryptedDigest");
-      return "Cannot build Sdm, some of required attributes are not set " + attributes;
-    }
+  public static Sdm of(String authorIdentity, String encryptedDigest) {
+    return new ImmutableSdm(authorIdentity, encryptedDigest);
   }
 }

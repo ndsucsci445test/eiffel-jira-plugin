@@ -7,7 +7,7 @@ import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ImmutableJiraIssueRelatedEventTest {
+public class JiraIssueRelatedEventTest {
     private static String jiraIssueCreatedEventString;
     private static String jiraissueCreatedeventFilePath = "src/test/resources/input/jira-issue-created.json";
 
@@ -28,21 +28,21 @@ public class ImmutableJiraIssueRelatedEventTest {
     }
 
     @Test
-    public void jsonParsingContainsOnlyDesiredFields() throws Exception {
-        ImmutableJiraIssueRelatedEvent expected = ImmutableJiraIssueRelatedEvent.builder()
-                .eventType("issue_created")
-                .issue(ImmutableJiraIssue.builder()
-                        .id("10032")
-                        .self(URI.create("https://eiffelplugin.atlassian.net/rest/api/2/issue/10032"))
-                        .fields(ImmutableJiraIssueFields.builder()
-                                .issueType(ImmutableJiraFieldsIssueType.builder()
-                                        .issueType(JiraIssueType.EPIC)
+    public void jiraJsonParsingIgnoresUnknownFields() throws Exception {
+        JiraIssueRelatedEvent expected = new JiraIssueRelatedEvent.Builder()
+                .setEventType("issue_created")
+                .setIssue(new JiraIssue.Builder()
+                        .setId("10032")
+                        .setSelf(URI.create("https://eiffelplugin.atlassian.net/rest/api/2/issue/10032"))
+                        .setFields(new JiraIssueFields.Builder()
+                                .setFieldsIssueType(new JiraFieldsIssueType.Builder()
+                                        .setIssueType(JiraIssueType.EPIC)
                                         .build())
                                 .build())
                         .build())
                 .build();
 
-        ImmutableJiraIssueRelatedEvent actual = mapper.readValue(jiraIssueCreatedEventString, ImmutableJiraIssueRelatedEvent.class);
+        JiraIssueRelatedEvent actual = mapper.readValue(jiraIssueCreatedEventString, JiraIssueRelatedEvent.class);
 
         Assert.assertEquals(expected, actual);
     }

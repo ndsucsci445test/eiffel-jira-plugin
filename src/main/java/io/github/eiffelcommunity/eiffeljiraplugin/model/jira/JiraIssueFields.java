@@ -3,14 +3,17 @@ package io.github.eiffelcommunity.eiffeljiraplugin.model.jira;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@JsonSerialize
-@JsonDeserialize
+@EiffelStyleImmutable
 @JsonIgnoreProperties(ignoreUnknown = true)
-public interface JiraIssueFields {
+@JsonDeserialize(builder = JiraIssueFields.Builder.class)
+public abstract class JiraIssueFields {
     @JsonProperty("issuetype")
-    ImmutableJiraFieldsIssueType issueType();
+    public abstract JiraFieldsIssueType getFieldsIssueType();
+
+    public static class Builder extends ImmutableJiraIssueFields.Builder {
+    }
 }
