@@ -15,41 +15,8 @@ import java.util.UUID;
 @EiffelStyleTuple
 @JsonSerialize(as = ImmutableLinkCause.class)
 @JsonDeserialize(as = ImmutableLinkCause.class)
-public abstract class LinkCause implements Link {
-    private static final EnumSet legalTargets = EnumSet.allOf(EiffelEventType.class);
-    private static final LinkType type = LinkType.CAUSE;
-    private static final boolean isMultipleAllowed = true;
-
-    public static LinkCause toTarget(Event event) {
-        if (legalTargets.contains(event.getMeta().getType())) {
-            return ImmutableLinkCause.of(type, event.getMeta().getId());
-        }
-        throw new IllegalArgumentException(event.getMeta().getType() + " is not a legal link target for " + type);
-    }
-
-    @Override
-    @Value.Derived
-    public boolean isMultipleAllowed() {
-        return isMultipleAllowed;
-    }
-
-    @Override
-    @Value.Derived
-    public EnumSet<EiffelEventType> getLegalTargets() {
-        return legalTargets;
-    }
-
-    @Override
-    @Value.Default
-    public LinkType getType() {
-        return LinkType.CAUSE;
-    }
-
-    @Override
-    public abstract UUID getTarget();
-
-    @Value.Check
-    protected void check() {
-        Preconditions.checkState(type.equals(getType()));
-    }
+public abstract class LinkCause extends Link {
+    legalTargets = EnumSet.allOf(EiffelEventType.class);
+    LinkType type = LinkType.CAUSE;
+    boolean isMultipleAllowed = true;
 }

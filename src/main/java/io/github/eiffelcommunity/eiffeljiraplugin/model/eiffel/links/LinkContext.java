@@ -16,7 +16,7 @@ import java.util.UUID;
 @JsonSerialize(as = ImmutableLinkContext.class)
 @JsonDeserialize(as = ImmutableLinkContext.class)
 public abstract class LinkContext implements Link {
-    private static final EnumSet legalTargets = EnumSet.allOf(EiffelEventType.class);
+    private static final EnumSet<EiffelEventType> legalTargets = EnumSet.allOf(EiffelEventType.class);
     private static final boolean isMultipleAllowed = false;
     private static final LinkType type = LinkType.CONTEXT;
 
