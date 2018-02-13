@@ -13,7 +13,7 @@ import org.immutables.value.Value;
 @JsonSerialize(as = ImmutableEiffelIssueDefinedEvent100Meta.class)
 @JsonDeserialize(builder = EiffelIssueDefinedEvent100Meta.Builder.class)
 public abstract class EiffelIssueDefinedEvent100Meta implements Meta100 {
-    private final static EventType type = AsYetUnimplmplementedEventType.EIFFEL_ISSUE_DEFINED_EVENT;
+    private final static EventType type = UnofficialEventType.EIFFEL_ISSUE_DEFINED_EVENT;
     private final static Semver version = new Semver("1.0.0");
 
     @Override
