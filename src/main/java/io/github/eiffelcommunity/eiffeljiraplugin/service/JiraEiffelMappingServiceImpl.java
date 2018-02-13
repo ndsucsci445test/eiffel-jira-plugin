@@ -4,7 +4,7 @@ import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefine
 import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefinedEvent100Data;
 import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueDefinedEvent100Meta;
 import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.EiffelIssueType;
-import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.links.Link;
+import io.github.eiffelcommunity.eiffeljiraplugin.model.eiffel.LinkImpl;
 import io.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssue;
 import io.github.eiffelcommunity.eiffeljiraplugin.model.jira.JiraIssueType;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class JiraEiffelMappingServiceImpl implements JiraEiffelMappingService {
                 .setType(toEiffelIssueType(jiraIssue.getFields().getFieldsIssueType().getIssueType()))
                 .build();
 
-        Set<Link> links = new HashSet<>();
+        Set<LinkImpl> links = new HashSet<>();
 
         return new EiffelIssueDefinedEvent100.Builder()
                 .setMeta(meta)

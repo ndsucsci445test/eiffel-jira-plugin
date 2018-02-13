@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Value.Immutable
 @EiffelStyleImmutable
-@JsonSerialize
+@JsonSerialize(as = ImmutableSource.class)
 @JsonDeserialize(builder = Source.Builder.class)
 public abstract class Source {
     public abstract Optional<String> getDomainId();

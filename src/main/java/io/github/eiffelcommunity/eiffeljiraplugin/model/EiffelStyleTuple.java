@@ -13,7 +13,7 @@ import org.immutables.value.Value;
         init = "set*",
         overshadowImplementation = true,
         forceJacksonPropertyNames = false,
-        defaults = @Value.Immutable(builder = false, copy = false))
+        defaults = @Value.Immutable(builder = false))
 @JsonInclude(JsonInclude.Include.ALWAYS)
 public @interface EiffelStyleTuple {
 }

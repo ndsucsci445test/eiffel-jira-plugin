@@ -9,7 +9,7 @@ public interface Meta {
         return UUID.randomUUID();
     }
 
-    EiffelEventType getType();
+    EventType getType();
 
     Semver getVersion();
 }
