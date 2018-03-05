@@ -23,7 +23,7 @@ import io.github.eiffelcommunity.eiffeljiraplugin.model.EiffelStyleImmutable;
 import org.immutables.value.Value;
 
 @Value.Immutable
-@EiffelStyleImmutable
+@vEiffelStyleImmutable
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonDeserialize(builder = JiraFieldsIssueType.Builder.class)
 public abstract class JiraFieldsIssueType {
